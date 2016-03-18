@@ -56,6 +56,8 @@ namespace Interface {
                 var buffer_id = get_buffer_id();
                 var window = new Application.Window(width, height, buffer_id, path);
                 
+                stderr.printf("create_window: %s, tab_id %d, buffer_id %s\n",
+                        path, tab_id, buffer_id);
                 window.create_app_tab.connect((tab_win_id, mode_name) => {
                         try {
                             daemon.show_app_tab(tab_win_id, mode_name, tab_id, window.buffer_id, "origin");
@@ -364,6 +366,7 @@ namespace Interface {
         }
         
         private void handle_reparent(int window_id) {
+            stderr.printf("%s: window_id 0x%x\n", Log.METHOD, window_id);
             foreach (Interface.Window window in window_list) {
                 if (window_id == window.window_id) {
                     var clone_windows = buffer_clone_map.get(window.buffer_id);

@@ -125,6 +125,7 @@ namespace WindowMode {
         }
         
         public void restore_window_focus_tab(ArrayList<Window> window_list, Window window) {
+            stderr.printf("%s\n", Log.METHOD);
             if (window.tabbar.tab_list.size > 0) {
                 var tab_index = 0;
                 int? focus_index = mode_focus_tab_map.get(window.mode_name);

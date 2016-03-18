@@ -91,6 +91,7 @@ namespace Application {
         
         public void handle_key_press(Gtk.Widget widget, Gdk.EventKey key_event) {
             string keyname = Keymap.get_keyevent_name(key_event);
+            stderr.printf ("%s key %s\n", Log.METHOD, keyname);
             if (keyname == "f") {
                 buffer.play_music(items.get(current_row));
                 

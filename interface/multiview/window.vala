@@ -32,7 +32,7 @@ namespace Interface {
             
             mode_name = get_mode_name();
             
-            realize.connect((w) => {
+            show.connect((w) => {
                     var xid = (int)((Gdk.X11.Window) get_window()).get_xid();
                     window_id = xid;
                     create_app_tab(window_id, mode_name);

@@ -659,6 +659,7 @@ namespace Widgets {
         
         public void switch_tab(int new_index) {
             var new_xid = tab_xid_map.get(tab_list.get(new_index));
+            stderr.printf("%s: new_xid %x\n", Log.METHOD, new_xid);
                 
             focus_window(new_xid);
                 

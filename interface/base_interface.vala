@@ -51,6 +51,7 @@ namespace Interface {
         }
         
         public void start(string[] args) {
+            stderr.printf ("%s\n", Log.METHOD);
             Bus.own_name(BusType.SESSION,
                          Application.dbus_name,
                          BusNameOwnerFlags.NONE,
@@ -79,6 +80,7 @@ int main(string[] args) {
     var client_server = new Interface.ClientServer();
     client_server.start(args);
     
+    stderr.printf("%s: client main\n", Log.METHOD);
     Gtk.main();
     
     return 0;

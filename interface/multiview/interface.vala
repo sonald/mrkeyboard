@@ -66,6 +66,7 @@ namespace Interface {
         }
 
         private void new_window(int width, int height, int tab_id, string buffer_id, Application.Buffer buffer) {
+            stderr.printf("%s: tab_id %d, buffer_id %s\n", Log.METHOD, tab_id, buffer_id);
             var window = new Application.Window(width, height, buffer_id, buffer);
                 
             window.create_app_tab.connect((tab_win_id, mode_name) => {

@@ -49,6 +49,7 @@ namespace Widgets {
                     window_manager.close_tab(this, mode_name, index, buffer_id);
                 });
             tabbar.focus_window.connect((xid) => {
+                    stderr.printf("on_focus_window: %s: xid %x\n", Log.METHOD, xid);
                     visible_tab(xid);
                 });
             tabbar.press_tab.connect((tab_index) => {
@@ -63,18 +64,19 @@ namespace Widgets {
         }
         
         public void visible_tab(int xid) {
-            var window_manager_xid = (int)((Gdk.X11.Window) window_manager.get_window()).get_xid();
+            var par = window_manager.get_toplevel().get_window();
             int x, y;
             window_content_area.translate_coordinates(window_manager.get_toplevel(), 0, 0, out x, out y);
             
-            window_manager.conn.reparent_window(
-                xid,
-                window_manager_xid,
-                (uint16)x,
-                (uint16)y);
-            window_manager.conn.flush();
-            
-            window_manager.reparent_window(xid);
+            //Timeout.add(1, () => {
+                var display = Gdk.Display.get_default();
+                var sub = Gdk.X11Window.foreign_new_for_display(display, xid);
+                sub.show ();
+                sub.reparent(par, x, y);
+
+                window_manager.reparent_window(xid);
+                //return false;
+            //});
         }
         
         public bool on_size_allocate(Gtk.Widget widget, Gdk.Rectangle rect) {

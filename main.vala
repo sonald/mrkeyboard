@@ -151,7 +151,8 @@ public class DaemonServer : Object {
         window_manager.key_release_event.connect((w, e) => {
                 var xid = window_manager.get_focus_tab_xid();
                 if (xid != null) {
-                    send_key_event(xid, e.keyval, e.state, e.hardware_keycode, e.time, false);
+                    stderr.printf("%s: wid 0x%x\n", Log.METHOD, xid);
+                    //send_key_event(xid, e.keyval, e.state, e.hardware_keycode, e.time, false);
                 }
                 
                 return true;

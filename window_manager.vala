@@ -183,6 +183,7 @@ namespace Widgets {
                 other_arg);
             
             try {
+                stderr.printf("%s: cmd %s\n", Log.METHOD, app_command);
                 Process.spawn_command_line_async(app_command);
             } catch (SpawnError e) {
                 print("Got error when spawn_command_line_async: %s\n", e.message);
@@ -537,8 +538,8 @@ namespace Widgets {
             var window = get_focus_window();
             if (window != null) {
                 switch_mode(window, mode_name);
-                
                 var window_child_size = window.get_child_allocate();
+                stderr.printf("%s, after switch_mode\n", Log.METHOD);
                 
                 tab_id_counter++;
                 if (visible_tab) {
@@ -551,6 +552,7 @@ namespace Widgets {
                     path,
                     window_child_size[0],
                     window_child_size[1]);
+
             }
         }
         
@@ -862,6 +864,7 @@ namespace Widgets {
         }
         
         public void show_tab(int tab_win_id, string mode_name, int tab_id, string buffer_id, string window_type) {
+            stderr.printf("%s: tab_win_id 0x%x, mode_name %s\n", Log.METHOD, tab_win_id, mode_name);
             var window = get_window_with_tab_id(tab_id);
             if (window != null) {
                 if (window.mode_name == "") {
